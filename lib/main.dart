@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme:ThemeData.dark().copyWith(
           primaryColor: Color(0xFF0A0E21),
-          accentColor: Color(0xFFef233c),
+//          accentColor: Color(0xFFef233c),
           scaffoldBackgroundColor: Color(0xFF0A0E21),
           sliderTheme: SliderTheme.of(context),
           textTheme: TextTheme(
