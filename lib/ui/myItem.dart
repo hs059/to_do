@@ -17,19 +17,18 @@ class MyItem extends StatelessWidget{
      actions: <Widget>[
        IconSlideAction(
          caption: 'Delete',
-         color: Colors.red,
-         icon: Icons.delete,closeOnTap: true,
+         color: Color(0xFF0A0E30),
+//         icon: Icons.delete,
+         closeOnTap: true,
+         iconWidget: Icon(Icons.delete,color: Color(0xFFFF0800),),
          onTap: () async {
-//           Provider.of<DBProvider>(context,listen: false).deleteTask(task);
-         },
+           Provider.of<DBProvider>(context,listen: false).deleteTask(task);
+           },
        ),
      ],
 
 
      child: ListTile(
-       leading: IconButton(icon: Icon(Icons.delete), onPressed: (){
-         Provider.of<DBProvider>(context,listen: false).deleteTask(task);
-       }),
          title: Text(task.title),
          trailing: Checkbox(
            checkColor: Color(0xFF0A0E21),
