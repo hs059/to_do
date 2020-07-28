@@ -73,8 +73,8 @@ class DBClient {
     } catch (error){
       throw 'error is $error';
     }
-
   }
+
   Future <List<Map<String, dynamic>>> getInCompleteTasks()async {
     try {
       database = await initDatabase();

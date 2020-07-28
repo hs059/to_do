@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do/models/task_model.dart';
 import 'package:to_do/providers/db_provider.dart';
 import 'package:to_do/ui/screens/all_tasks_tab.dart';
@@ -55,7 +54,9 @@ class MainScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: Icon(FontAwesomeIcons.clipboardList),
-          title: Text('TODO',style: GoogleFonts.pacifico(),),
+          title: Text('TODO',style: TextStyle(
+            fontFamily: 'Pacifico' ,
+          ),),
           bottom: TabBar(
             tabs: [
               Tab(
