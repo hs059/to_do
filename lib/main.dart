@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<DBProvider>(
       create: (BuildContext context) => DBProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme:ThemeData.dark().copyWith(
           primaryColor: Color(0xFF0A0E21),
 //          accentColor: Color(0xFFef233c),

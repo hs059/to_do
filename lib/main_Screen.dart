@@ -8,13 +8,18 @@ import 'package:to_do/ui/screens/complete_tasks_tab.dart';
 import 'package:to_do/ui/screens/inComplete_tasks_tab.dart';
 import 'package:provider/provider.dart';
 
-
 class MainScreen extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey();
   String title;
 
   setTitle(String value) {
     this.title = value;
+  }
+
+  String description;
+
+  setDescription(String value) {
+    this.description = value;
   }
 
   submitTask(BuildContext context) {
@@ -24,6 +29,7 @@ class MainScreen extends StatelessWidget {
         Provider.of<DBProvider>(context, listen: false).insertNewTask(
           Task(
             title: this.title,
+            description: this.description,
           ),
         );
         Navigator.pop(context);
@@ -54,19 +60,22 @@ class MainScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: Icon(FontAwesomeIcons.clipboardList),
-          title: Text('TODO',style: TextStyle(
-            fontFamily: 'Pacifico' ,
-          ),),
+          title: Text(
+            'Notes',
+            style: TextStyle(
+              fontFamily: 'Pacifico',
+            ),
+          ),
           bottom: TabBar(
             tabs: [
               Tab(
-                text: '  All\nTasks',
+                text: '  All\nNotes',
               ),
               Tab(
-                text: 'Complete\n   Tasks',
+                text: 'Complete\n   Notes',
               ),
               Tab(
-                text: 'InComplete\n    Tasks',
+                text: 'InComplete\n    Notes',
               ),
             ],
           ),
@@ -86,7 +95,7 @@ class MainScreen extends StatelessWidget {
           future: Provider.of<DBProvider>(context).setAllLists(),
           builder: (context, snapshot) {
             return TabBarView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 children: [
                   AllTasksTab(),
                   CompleteTasksTab(),
@@ -108,28 +117,57 @@ class MainScreen extends StatelessWidget {
                   contentPadding: const EdgeInsets.all(16.0),
                   content: Form(
                     key: formKey,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'text title is required';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-
-                        labelText: 'Task',
-                        fillColor: Color(0xFF0A0E21),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'text title is required';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Note title',
+                            fillColor: Color(0xFF0A0E21),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(20),
+                          onSaved: (value) {
+                            setTitle(value);
+                          },
                         ),
-                      ),
-                      onSaved: (value) {
-                        setTitle(value);
-                      },
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'text title is required';
+                            }
+                            return null;
+                          },
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                            labelText: 'description',
+                            fillColor: Color(0xFF0A0E21),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onSaved: (value) {
+                            setDescription(value);
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   actions: <Widget>[
@@ -139,7 +177,7 @@ class MainScreen extends StatelessWidget {
                           Navigator.pop(context);
                         }),
                     new FlatButton(
-                        child: const Text('AddTask'),
+                        child: const Text('Add Note'),
                         onPressed: () {
                           submitTask(context);
                         })

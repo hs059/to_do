@@ -13,6 +13,7 @@ class DBClient {
 
   final String taskTableName = 'tasks';
   final String taskTitleColumn = 'taskTitle';
+  final String taskDescriptionColumn = 'taskDescription';
   final String taskIdColumn = 'taskId';
   final String taskIsCompleteColumn = 'taskComplete';
 
@@ -37,6 +38,7 @@ class DBClient {
               db.execute('''CREATE TABLE $taskTableName(
           $taskIdColumn INTEGER PRIMARY KEY AUTOINCREMENT,
           $taskTitleColumn TEXT NOT NULL,
+          $taskDescriptionColumn TEXT NOT NULL,
           $taskIsCompleteColumn INTEGER NOT NULL
       )''');
 
